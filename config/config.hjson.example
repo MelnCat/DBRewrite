@@ -1,0 +1,9 @@
+{
+	token: ""
+	mainServer: "snowflake"
+	databaseUrl: postgresql://johndoe:mypassword@localhost:5432/mydb?schema=public
+	emojis: {
+		yes: ""
+		no: ""
+	}
+}

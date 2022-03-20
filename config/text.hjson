@@ -1,0 +1,16 @@
+{
+	bot: {
+		status: {
+			name: "name here"
+			// Can be either COMPETING, LISTENING, PLAYING, STREAMING, or WATCHING.
+			type: PLAYING
+		}
+		name: Drunk Bartender
+	}
+	commands: {
+		order: {
+			success: "[yes] Your order for **{}** has been placed! The order ID is `{}`."
+			exists: "[no] You already have an active order."
+		}
+	}
+}
