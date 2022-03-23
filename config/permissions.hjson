@@ -1,0 +1,20 @@
+{
+	// examplePermission: {
+	// 	grant: "otherPermission" // Grant this permission another permission defined here. Can also be an array.
+	// 	roles: {
+	// 		// Roles will check the user's roles in the MAIN SERVER, not the roles in the server it was ran in.
+	// 		employee: true // Use a role defined in config.roles
+	// 		012345678912345678: true // Use a role by its ID (not recommended)
+	// 		213345578933345648: false // Deny a role this permission.
+	// 	}
+	// 	users: {
+	// 		<owners>: true // Makes bot owners have this permission.
+	// 		912345678902012309: true // Use a user by its ID (not recommended)
+	// 	}
+	// }
+	employee: {
+		roles: {
+			employee: true
+		}
+	}
+}

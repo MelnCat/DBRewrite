@@ -2,7 +2,8 @@ import type { GuildEmoji } from "discord.js";
 import { client } from "../providers/client";
 import { loadCommands } from "../providers/commandManager";
 import { config, text } from "../providers/config";
-import { mainGuild, setMainGuild } from "../providers/discord";
+import { mainEmojis, mainGuild, setMainGuild } from "../providers/discord";
+import { parseText } from "../utils/string";
 import { isNotInitialized } from "../utils/utils";
 
 type TextObject = {
@@ -18,8 +19,7 @@ client.on("ready", async () => {
 	const emojis = Object.fromEntries(
 		await Promise.all(Object.entries(config.emojis).map(async x => [x[0], await mainGuild.emojis.fetch(x[1])]))
 	) as Record<string, GuildEmoji>;
-	const parseText = (str: string) =>
-		str.replaceAll(/\[(\w+)\]/g, (_, key) => emojis[key]?.toString() ?? _);
+	Object.assign(mainEmojis, emojis);
 	const parseTexts = (texts: TextObject) => {
 		for (const k in texts) {
 			if (typeof texts[k] === "string") texts[k] = parseText(texts[k] as string);

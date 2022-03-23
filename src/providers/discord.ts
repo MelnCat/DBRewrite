@@ -6,3 +6,5 @@ import { config } from "./config";
 export let mainGuild = client.guilds.cache.get(config.mainServer) ?? notInitialized("mainGuild");
 
 export const setMainGuild = (guild: Guild) => mainGuild = guild;
+
+export const mainEmojis: Record<string, string> = {};

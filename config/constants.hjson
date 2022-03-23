@@ -1,4 +1,3 @@
 {
-	// In milliseconds.
-	interactionExpiryTime: 30000 // 30 seconds
+	interactionExpiryTimeMs: 30000 // 30 seconds
 }

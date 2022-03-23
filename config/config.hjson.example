@@ -1,9 +1,15 @@
 {
 	token: ""
 	mainServer: "snowflake"
-	databaseUrl: postgresql://johndoe:mypassword@localhost:5432/mydb?schema=public
+	databaseUrl: postgresql://username:hunter2@localhost:5432/mydb?schema=public
+	owners: [
+		"413143886702313472"
+	]
 	emojis: {
 		yes: ""
 		no: ""
+	}
+	roles: {
+		employee: ""
 	}
 }

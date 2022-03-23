@@ -7,7 +7,7 @@ import type { Formattable } from "../utils/string";
 import { formatZodError } from "../utils/zod";
 import pc from "picocolors";
 
-const snowflake = z.string().length(18).regex(/^\d+$/);
+export const snowflake = z.string().length(18).regex(/^\d+$/);
 const formattable = <T extends number>(n: T) =>
 	z
 		.string()
@@ -36,27 +36,32 @@ const configSchema = z
 	.object({
 		token: z.string(),
 		mainServer: snowflake,
+		owners: snowflake.array(),
 		databaseUrl: z.string().url(),
-		emojis: z.record(z.string(), snowflake)
+		emojis: z.record(z.string(), snowflake),
+		roles: z.object({
+			employee: snowflake
+		})
 	})
 	.strict();
 
 const constantsSchema = z
 	.object({
-		interactionExpiryTime: z.number(),
+		interactionExpiryTimeMs: z.number(),
 	})
 	.strict();
 
-const folder = path.join(__dirname, "../../config/");
+export const configFolder = path.join(__dirname, "../../config/");
 
-const parse = <T>(schema: z.ZodType<T>, file: string) => {
-	const sp = schema.safeParse(HJSON.parse(fs.readFileSync(path.join(folder, file), "utf-8")));
+export const parseHjson = <T>(schema: z.ZodType<T>, file: string) => {
+	const sp = schema.safeParse(HJSON.parse(fs.readFileSync(path.join(configFolder, file), "utf-8")));
 	if (sp.success) return sp.data;
 	console.error(pc.bgRed(pc.yellow(`Issue(s) found when scanning config ${pc.white(pc.bold(file))}.`)));
 	console.error(formatZodError(sp.error));
 	throw sp.error;
 };
 
-export const text = parse(textSchema, "text.hjson");
-export const config = parse(configSchema, "config.hjson");
-export const constants = parse(constantsSchema, "constants.hjson");
+export const text = parseHjson(textSchema, "text.hjson");
+export const config = parseHjson(configSchema, "config.hjson");
+export const constants = parseHjson(constantsSchema, "constants.hjson");
+

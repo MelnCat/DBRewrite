@@ -1,5 +1,6 @@
 generator client {
-    provider = "prisma-client-js"
+    provider      = "prisma-client-js"
+    binaryTargets = ["native"]
 }
 
 datasource db {
@@ -13,7 +14,7 @@ model Order {
     user      String      @db.Char(18)
     details   String
     status    OrderStatus @default(UNPREPARED)
-    claimer   String?      @db.Char(18)
+    claimer   String?     @db.Char(18)
 }
 
 enum OrderStatus {
