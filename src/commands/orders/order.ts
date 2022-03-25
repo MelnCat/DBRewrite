@@ -16,8 +16,8 @@ export const command = new Command("order", "Orders a drink.")
 			data: {
 				id: await generateOrderId(),
 				user: int.user.id,
-				details: drink
-			}
+				details: drink,
+			},
 		});
-		await int.reply(format(text.commands.order.success, drink, order.id));
+		await int.reply(format(text.commands.order.success, { id: order.id, details: drink }));
 	});

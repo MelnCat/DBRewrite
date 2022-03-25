@@ -5,7 +5,7 @@ export const formatZodError = (err: ZodError) =>
 	`${pc.red(`${err.issues.length} issue(s) found.`)}\n${err.issues.map(formatZodIssue).join("\n")}`;
 
 export const formatZodIssue = (iss: ZodIssue) => 
-	`${pc.red(`Error at ${pc.bold(iss.path.join("."))}: `)} ${getZodIssueMessage(iss)}`;
+	`${pc.red(`Error at ${pc.bold(iss.path.join(".")) || "Unknown"}: `)}${getZodIssueMessage(iss)}`;
 
 export const getZodIssueMessage = (iss: ZodIssue) => {
 	switch (iss.code) {

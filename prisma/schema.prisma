@@ -13,19 +13,19 @@ model Order {
     createdAt DateTime    @default(now())
     user      String      @db.Char(18)
     details   String
-    status    OrderStatus @default(UNPREPARED)
+    status    OrderStatus @default(Unprepared)
     claimer   String?     @db.Char(18)
 }
 
 enum OrderStatus {
-    UNPREPARED
-    PREPARING
-    BREWING
-    FERMENTING
-    PENDING_DELIVERY
-    DELIVERING
-    DELIVERED
-    CANCELLED
-    DELETED
-    FAILED
+    Unprepared
+    Preparing
+    Brewing
+    Fermenting
+    PendingDelivery
+    Delivering
+    Delivered
+    Cancelled
+    Deleted
+    Failed
 }

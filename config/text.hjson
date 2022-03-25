@@ -7,10 +7,24 @@
 		}
 		name: Drunk Bartender
 	}
+	statuses: {
+		PendingDelivery: Pending Delivery
+	}
 	commands: {
 		order: {
-			success: "[yes] Your order for **{}** has been placed! The order ID is `{}`."
+			success: "[yes] Your order for **{details}** has been placed! The order ID is `{id}`."
 			exists: "[no] You already have an active order."
+		}
+		list: {
+			title: **__Current Orders__**
+			parts: {
+				id: `{}`
+				status: **{}**
+				details: `{}`
+				time: *{}*
+				claimedBy: **Claimed by {}**
+				unclaimed: **UNCLAIMED**
+			}
 		}
 	}
 }

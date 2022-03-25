@@ -4,12 +4,12 @@ import { resolveUserId } from "../utils/id";
 import { db } from "./database";
 
 export const activeOrderStatus = [
-	OrderStatus.UNPREPARED,
-	OrderStatus.PREPARING,
-	OrderStatus.BREWING,
-	OrderStatus.FERMENTING,
-	OrderStatus.PENDING_DELIVERY,
-	OrderStatus.DELIVERING,
+	OrderStatus.Unprepared,
+	OrderStatus.Preparing,
+	OrderStatus.Brewing,
+	OrderStatus.Fermenting,
+	OrderStatus.PendingDelivery,
+	OrderStatus.Delivering,
 ];
 
 export const hasActiveOrder = async (user: UserResolvable) =>
@@ -44,3 +44,5 @@ export const generateOrderId = async () => {
 	}
 	throw new Error("This error should never appear. If it does, please buy a lottery ticket.");
 };
+
+export const getAllActiveOrders = async() => db.order.findMany({ where: { status: { in: activeOrderStatus } } });
