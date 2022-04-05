@@ -14,18 +14,33 @@ model Order {
     user      String      @db.Char(18)
     details   String
     status    OrderStatus @default(Unprepared)
-    claimer   String?     @db.Char(18)
+    channel   String      @db.Char(18)
+    guild     String      @db.Char(18)
+
+    claimer String?   @db.Char(18)
+    image   String?
+    timeout DateTime?
 }
 
 enum OrderStatus {
     Unprepared
     Preparing
     Brewing
-    Fermenting
+    Fermenting // Unused
     PendingDelivery
     Delivering
     Delivered
     Cancelled
     Deleted
     Failed
+}
+
+model WorkerInfo {
+    id        String   @id @db.VarChar(10)
+    createdAt DateTime @default(now())
+
+    preparations Int @default(0)
+    deliveries   Int @default(0)
+
+    deliveryMessage String?
 }

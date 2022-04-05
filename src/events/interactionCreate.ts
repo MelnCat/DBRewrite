@@ -1,7 +1,7 @@
 import type { InteractionByType } from "../utils/components";
 import { client } from "../providers/client";
 import { commandRegistry } from "../providers/commandManager";
-import { constants } from "../providers/config";
+import { constants, text } from "../providers/config";
 import { LifetimeMap } from "../structures/LifetimeMap";
 import type { Awaitable } from "discord.js";
 import { StopCommandExecution } from "../utils/error";
@@ -21,7 +21,7 @@ client.on("interactionCreate", async int => {
 			if (!command) throw new Error(`Unregistered command ${int.commandName}`);
 			// TODO remove this and use discord builtin when permissions get better
 			for (const perm of command.permissions) await perm.check(int);
-			command.executor(int);
+			await command.executor(int);
 		} else if (int.isMessageComponent()) {
 			if (componentCallbacks.has(int.customId))
 				await componentCallbacks.get(int.customId)?.(int as InteractionByType);
@@ -29,6 +29,9 @@ client.on("interactionCreate", async int => {
 				if (int.isButton()) await int.followUp({ content: "This interaction has expired.", ephemeral: true });
 		}
 	} catch (e) {
-		if (!(e instanceof StopCommandExecution)) throw e;
+		if (!(e instanceof StopCommandExecution)) {
+			if (int.isApplicationCommand()) int.reply({ content: text.errors.exception, ephemeral: true }).catch();
+			console.error(e);
+		}
 	}
 });

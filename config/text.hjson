@@ -10,6 +10,26 @@
 	statuses: {
 		PendingDelivery: Pending Delivery
 	}
+	common: {
+		invalidOrderId: "[no] No order was found by that ID. Try checking your capitalization and numbers."
+		noActiveOrder: "[no] You do not have an active order. Order one with `/order`!"
+		noClaimedOrder: "[no] You do not have an order claimed currently."
+		identified: **{name}** (`{id}`)
+		orderEmbed: {
+			title: Order Information for `{}`
+			description: Information about the order `{}`.
+			fields: {
+				id: 🎫 ID
+				details: 🍹 Details
+				status: 🚦 Status
+				customer: 👤 Customer
+				channel: "#️⃣ Channel" // It thinks the #️⃣ emoji is a #
+				guild: 🏚️ Guild
+				claimer: 🎟️ Claimer
+				orderedAt: ⏰ Ordered At
+			}
+		}
+	}
 	commands: {
 		order: {
 			success: "[yes] Your order for **{details}** has been placed! The order ID is `{id}`."
@@ -17,6 +37,7 @@
 		}
 		list: {
 			title: **__Current Orders__**
+			empty: *There are currently no active orders.*
 			parts: {
 				id: `{}`
 				status: **{}**
@@ -26,5 +47,20 @@
 				unclaimed: **UNCLAIMED**
 			}
 		}
+		claim: {
+			existing: "[no] You already have an order claimed."
+			success: "[yes] You have successfully claimed the order."
+		}
+		cancel: {
+			success: "[yes] Your order has been successfully cancelled."
+		}
+		brew: {
+			invalidUrl: "[no] Please specify a valid URL."
+			success: "[yes] The order is now brewing."
+		}
+	}
+	errors: {
+		exception: ":electric_plug: An internal error has occurred while running this command. Please report this to the developers of this bot."
+		unauthorized: "[no] You do not have permission to use this command. You must have the `{}` permission."
 	}
 }

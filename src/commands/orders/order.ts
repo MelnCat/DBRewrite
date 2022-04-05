@@ -17,7 +17,10 @@ export const command = new Command("order", "Orders a drink.")
 				id: await generateOrderId(),
 				user: int.user.id,
 				details: drink,
+				channel: int.channelId,
+				guild: int.guildId
 			},
 		});
 		await int.reply(format(text.commands.order.success, { id: order.id, details: drink }));
+		if (int.member.nickname?.toLowerCase() === "bart") int.followUp("i will end you");
 	});

@@ -3,8 +3,8 @@ import { DiscordAPIError } from "discord.js";
 import { z } from "zod";
 import { StopCommandExecution } from "../utils/error";
 import { resolveUserId } from "../utils/id";
-import { parseText } from "../utils/string";
-import { config, parseHjson, snowflake } from "./config";
+import { format, parseText } from "../utils/string";
+import { config, parseHjson, snowflake, text } from "./config";
 import { mainGuild } from "./discord";
 
 const permissionSchema = z.object({
@@ -12,10 +12,11 @@ const permissionSchema = z.object({
 	roles: z
 		.record(z.union([snowflake, z.never(), ...Object.keys(config.roles).map(x => z.literal(x))]), z.boolean())
 		.optional(),
-	users: z.record(z.union([snowflake, z.literal("owners")]), z.boolean()).optional(),
+	users: z.record(z.union([snowflake, z.literal("<developers>")]), z.boolean()).optional(),
 });
 const permissionsSchema = z
 	.object({
+		developer: permissionSchema,
 		employee: permissionSchema,
 	})
 	.strict();
@@ -40,8 +41,8 @@ export class Permission {
 		const user = resolveUserId(ur);
 		if (user in this.users) return this.users[user];
 		try {
-			const member = await mainGuild.members.fetch(ur);
-			for (const role of member.roles.cache.keys()) {
+			const member = await mainGuild.members.fetch(ur).catch(() => null);
+			if (member) for (const role of member.roles.cache.keys()) {
 				if (role in this.roles) return this.roles[role];
 			}
 		} catch (e) {
@@ -54,9 +55,7 @@ export class Permission {
 		if (!(await this.hasPermission(int.user))) {
 			await int.reply({
 				ephemeral: true,
-				content: parseText(
-					`[no] You do not have permission to use this command. You must have the \`${this.name}\` permission.`
-				),
+				content: format(text.errors.unauthorized, this.name),
 			});
 			throw new StopCommandExecution();
 		}
@@ -75,8 +74,8 @@ for (const [i, v] of Object.values(parsed).entries()) {
 	if ("users" in v) Object.assign(perm.users, v.users ?? {});
 	if ("roles" in v) Object.assign(perm.roles, v.roles ?? {});
 	for (const u in perm.users)
-		if (u === "<owners>") {
-			for (const owner of config.owners) perm.users[owner] = perm.users[u];
+		if (u === "<developers>") {
+			for (const dev of config.developers) perm.users[dev] = perm.users[u];
 			delete perm.users[u];
 		}
 	for (const r in perm.roles) {

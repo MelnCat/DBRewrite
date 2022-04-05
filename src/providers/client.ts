@@ -15,6 +15,9 @@ export const client = new Client({
 		activities: [text.bot.status],
 		status: development ? "idle" : "online",
 	},
+	partials: [
+		"CHANNEL", "USER"
+	]
 });
 
 export const rest = new REST({ version: "9" }).setToken(config.token);

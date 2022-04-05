@@ -20,7 +20,7 @@ type FormatArguments<T extends string> = A.Equals<T, string> extends 1
 	? L.Repeat<string, CountStr<T, "{}">>
 	: N.Greater<CountStr<T, `{${string}}`>, 0> extends 1
 	? [Record<ExtractPlaceholders<T>[number], Placeholder>]
-	: [];
+	: string[] | [Record<string, Placeholder>];
 
 export const format = <T extends string>(str: T, ...arr: FormatArguments<T>): string =>
 	str.includes("{}")

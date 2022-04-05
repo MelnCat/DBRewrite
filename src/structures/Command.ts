@@ -1,9 +1,9 @@
 import type { ApplicationCommandPermissionData, CommandInteraction } from "discord.js";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { capitalize } from "../utils/string";
-import { Permission } from "../providers/permissions";
+import type { Permission } from "../providers/permissions";
 
-export type CommandExecutor = (interaction: CommandInteraction<"cached">) => void;
+export type CommandExecutor = (interaction: CommandInteraction<"cached">) => void | Promise<void>;
 
 export type CommandOptionType = Extract<
 	keyof SlashCommandBuilder,

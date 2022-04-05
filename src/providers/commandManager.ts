@@ -51,7 +51,7 @@ export const loadCommands = async (): Promise<Command[]> => {
 	for (const file of commandFiles) {
 		const data = (await import(file)) as { command: unknown };
 		if (!(data.command instanceof Command)) throw new Error(`File ${file} does not export 'command'.`);
-		console.log(`Registered command ${basename(file)}`);
+		console.log(`Registered command ${basename(file, ".js")}.`);
 		commands.push(data.command);
 	}
 	await registerCommands(commands);

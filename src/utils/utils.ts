@@ -28,3 +28,11 @@ export const notInitialized = <T>(identifier?: string) => {
 
 export const isNotInitialized = (v: unknown) =>
 	(v as Record<typeof notInitializedSymbol, boolean | undefined>)[notInitializedSymbol] === true;
+
+export const typedEntries = <T extends object>(obj: T) =>
+	Object.entries(obj) as {
+		[K in keyof T]: [K, T[K]];
+	}[keyof T][];
+
+export const typedFromEntries = <K extends string | number | symbol, V>(arr: readonly (readonly [K, V])[]) =>
+	Object.fromEntries(arr) as { [k in K]: V };

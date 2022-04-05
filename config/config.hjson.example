@@ -2,7 +2,7 @@
 	token: ""
 	mainServer: "snowflake"
 	databaseUrl: postgresql://username:hunter2@localhost:5432/mydb?schema=public
-	owners: [
+	developers: [
 		"413143886702313472"
 	]
 	emojis: {
@@ -11,5 +11,9 @@
 	}
 	roles: {
 		employee: ""
+	}
+	channels: {
+		brewery: ""
+		delivery: ""
 	}
 }

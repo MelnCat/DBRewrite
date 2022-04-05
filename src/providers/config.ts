@@ -39,6 +39,26 @@ const textSchema = z
 			z.union([z.never(), z.never(), ...Object.values(OrderStatus).map(x => z.literal(x))]).optional(),
 			z.string()
 		),
+		common: z.object({
+			invalidOrderId: z.string(),
+			noActiveOrder: z.string(),
+			noClaimedOrder: z.string(),
+			identified: nFormattable("name", "id"),
+			orderEmbed: z.object({
+				title: pFormattable(),
+				description: pFormattable(),
+				fields: z.object({
+					id: z.string(),
+					details: z.string(),
+					status: z.string(),
+					customer: z.string(),
+					channel: z.string(),
+					guild: z.string(),
+					claimer: z.string(),
+					orderedAt: z.string()
+				}),
+			}),
+		}),
 		commands: z.object({
 			order: z.object({
 				success: nFormattable("details", "id"),
@@ -46,6 +66,7 @@ const textSchema = z
 			}),
 			list: z.object({
 				title: z.string(),
+				empty: z.string(),
 				parts: z.object({
 					id: pFormattable(),
 					status: pFormattable(),
@@ -55,6 +76,21 @@ const textSchema = z
 					unclaimed: z.string(),
 				}),
 			}),
+			claim: z.object({
+				existing: z.string(),
+				success: z.string(),
+			}),
+			cancel: z.object({
+				success: z.string(),
+			}),
+			brew: z.object({
+				invalidUrl: z.string(),
+				success: z.string(),
+			}),
+		}),
+		errors: z.object({
+			unauthorized: pFormattable(),
+			exception: z.string(),
 		}),
 	})
 	.strict();
@@ -63,18 +99,23 @@ const configSchema = z
 	.object({
 		token: z.string(),
 		mainServer: snowflake,
-		owners: snowflake.array(),
+		developers: snowflake.array(),
 		databaseUrl: z.string().url(),
 		emojis: z.record(z.string(), snowflake),
 		roles: z.object({
 			employee: snowflake,
 		}),
+		channels: z.object({
+			brewery: snowflake,
+			delivery: snowflake,
+		})
 	})
 	.strict();
 
 const constantsSchema = z
 	.object({
 		interactionExpiryTimeMs: z.number(),
+		brewTimeRangeMs: z.tuple([z.number(), z.number()])
 	})
 	.strict();
 
