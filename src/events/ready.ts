@@ -1,4 +1,4 @@
-import type { GuildEmoji } from "discord.js";
+import type { GuildEmoji, TextBasedChannel } from "discord.js";
 import { client } from "../providers/client";
 import { loadCommands } from "../providers/commandManager";
 import { config, text } from "../providers/config";
@@ -18,10 +18,10 @@ client.on("ready", async () => {
 	loadCommands();
 	if (isNotInitialized(mainGuild)) setMainGuild(await client.guilds.fetch(config.mainServer));
 	for (const ch in mainChannels) {
-		if (isNotInitialized(mainChannels[ch])) {
+		if (isNotInitialized(mainChannels[ch as keyof typeof mainChannels])) {
 			const channel = await client.channels.fetch(config.channels[ch as keyof typeof config["channels"]]);
 			if (!channel) throw new IllegalStateError(`Main channel ${ch}was not found.`);
-			mainChannels[ch] = channel;
+			mainChannels[ch as keyof typeof mainChannels] = channel as TextBasedChannel;
 		}
 	}
 	mainGuild.emojis.fetch();
