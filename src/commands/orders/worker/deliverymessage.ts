@@ -20,7 +20,7 @@ import { format } from "../../../utils/string";
 
 const tcdp = text.commands.deliverymessage.placeholders;
 const placeholderMessage = `${tcdp.title}\n${Object.entries(tcdp.list)
-	.sort((a, b) => requiredOrderPlaceholders.includes(b[0]) ? 1 : -1)
+	.sort((a, b) => (requiredOrderPlaceholders.includes(b[0]) ? 1 : -1))
 	.map(([k, v]) => format(requiredOrderPlaceholders.includes(k) ? tcdp.requiredFormat : tcdp.format, k, v))
 	.join("\n")}`;
 
@@ -58,7 +58,12 @@ export const command = new Command("deliverymessage", "Configures your delivery 
 			case "set": {
 				const message = int.options.getString("message", true);
 				if (requiredOrderPlaceholders.some(x => !message.includes(`{${x}}`))) {
-					await int.reply(text.commands.deliverymessage.set.missing);
+					await int.reply(
+						format(
+							text.commands.deliverymessage.set.missing,
+							requiredOrderPlaceholders.map(x => `\`${x}\``).join(", ")
+						)
+					);
 					return;
 				}
 				await upsertWorkerInfo(int.user);

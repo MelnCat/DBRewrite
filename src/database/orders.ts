@@ -132,7 +132,7 @@ export const orderEmbedAsync = async (order: Order) => {
 
 export const requiredOrderPlaceholders = ["mention", "image"];
 
-export const orderPlaceholders = async(order: Order) => ({
+export const orderPlaceholders = async(order: Order) => Object.assign(Object.create(null), {
 	preparer: order.claimer ? formatUser((await client.users.fetch(order.claimer).catch(nulli)) ?? order.claimer) : "Unknown",
 	deliverer: order.deliverer ? formatUser((await client.users.fetch(order.deliverer).catch(nulli)) ?? order.deliverer) : "Unknown",
 	id: order.id,
