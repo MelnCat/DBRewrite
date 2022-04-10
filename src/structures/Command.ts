@@ -41,6 +41,16 @@ export class Command {
 		return this;
 	}
 
+	addSubCommand(...args: Parameters<SlashCommandBuilder["addSubcommand"]>) {
+		this.#slash.addSubcommand(...args);
+		return this;
+	}
+
+	addSubcommandGroup(...args: Parameters<SlashCommandBuilder["addSubcommandGroup"]>) {
+		this.#slash.addSubcommandGroup(...args);
+		return this;
+	}
+
 	addPermission(permission: Permission) {
 		this.permissions.push(permission);
 		return this;

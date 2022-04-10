@@ -8,7 +8,7 @@ import { development } from "./env";
 if (globalThis._$clientLoaded) throw new Error("The client was loaded twice. This should never happen.");
 globalThis._$clientLoaded = true;
 
-export const client = new Client({
+export const client = new Client<true>({
 	shards: "auto",
 	intents: ["GUILD_MEMBERS", "GUILDS"],
 	presence: {

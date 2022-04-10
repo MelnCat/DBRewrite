@@ -129,3 +129,15 @@ export const orderEmbedAsync = async (order: Order) => {
 		);
 	return embed;
 };
+
+export const requiredOrderPlaceholders = ["mention", "image"];
+
+export const orderPlaceholders = async(order: Order) => ({
+	preparer: order.claimer ? formatUser((await client.users.fetch(order.claimer).catch(nulli)) ?? order.claimer) : "Unknown",
+	deliverer: order.deliverer ? formatUser((await client.users.fetch(order.deliverer).catch(nulli)) ?? order.deliverer) : "Unknown",
+	id: order.id,
+	details: order.details,
+	mention: `<@${order.user}>`,
+	user: formatUser((await client.users.fetch(order.user).catch(nulli)) ?? order.user),
+	image: order.image ?? "No image was found, this is very bad."
+});

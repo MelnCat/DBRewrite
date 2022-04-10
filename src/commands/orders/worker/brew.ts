@@ -1,6 +1,7 @@
 import { OrderStatus } from "@prisma/client";
 import { db } from "../../../database/database";
 import { generateOrderId, getClaimedOrder, hasActiveOrder, matchActiveOrder, matchOrderStatus } from "../../../database/orders";
+import { upsertWorkerInfo } from "../../../database/workerInfo";
 import { client } from "../../../providers/client";
 import { config, constants, text } from "../../../providers/config";
 import { mainGuild } from "../../../providers/discord";
@@ -33,6 +34,15 @@ export const command = new Command("brew", "Brews your claimed order.")
 				status: OrderStatus.Brewing,
 				image,
 				timeout: new Date(Date.now() + time),
+			},
+		});
+		await upsertWorkerInfo(int.user);
+		await db.workerInfo.update({
+			where: {
+				id: int.user.id,
+			},
+			data: {
+				preparations: { increment: 1 },
 			},
 		});
 		await int.reply(text.commands.brew.success);

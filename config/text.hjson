@@ -58,6 +58,41 @@
 			invalidUrl: "[no] Please specify a valid URL."
 			success: "[yes] The order is now brewing."
 		}
+		deliver: {
+			noMessage: ⚠️ You do not have a delivery message set, and the default message was used. Make to set one with `/deliverymessage`!
+			noChannel: "[no] I wasn't able to access the channel for the order, and the order failed to deliver."
+			success: "[yes] The order has been successfully delivered."
+			default: Hi, {mention}! Here is your {details}, delivered by {preparer}. Make sure to give feedback with `/feedback` and tip with `/tip`!\n{image}
+		}
+		deliverymessage: {
+			get:
+				'''
+				Your current delivery message is 
+				```
+				{}
+				```
+				Example:
+				{}
+				'''
+			set: {
+				missing: "[no] You are missing the required placeholders {}."
+				success: "[yes] Your delivery message was successfully changed."
+			}
+			placeholders: {
+				title: **Delivery Placeholders**\nTo use a placeholder, surround it in braces (for example, `{id}`).\nPlaceholders with an asterisk \\* are required.
+				format: `{}`: {}
+				requiredFormat: `{}`\\*: {}
+				list: {
+					preparer: The worker who prepared the order.
+					deliverer: The worker who delivered the order (you!)
+					id: The order ID.
+					details: The order details.
+					mention: The customer who ordered the drink as a mention.
+					user: The customer who ordered the drink as a simple Username#1234 tag.
+					image: The image supplied for the order.
+				}
+			}
+		}
 	}
 	errors: {
 		exception: ":electric_plug: An internal error has occurred while running this command. Please report this to the developers of this bot."

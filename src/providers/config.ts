@@ -87,6 +87,25 @@ const textSchema = z
 				invalidUrl: z.string(),
 				success: z.string(),
 			}),
+			deliver: z.object({
+				noMessage: z.string(),
+				noChannel: z.string(),
+				success: z.string(),
+				default: z.string(),
+			}),
+			deliverymessage: z.object({
+				get: z.string(),
+				set: z.object({
+					missing: z.string(),
+					success: z.string(),
+				}),
+				placeholders: z.object({
+					title: z.string(),
+					format: z.string(),
+					requiredFormat: z.string(),
+					list: z.record(z.string(), z.string())
+				})
+			}),
 		}),
 		errors: z.object({
 			unauthorized: pFormattable(),

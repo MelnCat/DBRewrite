@@ -17,9 +17,10 @@ model Order {
     channel   String      @db.Char(18)
     guild     String      @db.Char(18)
 
-    claimer String?   @db.Char(18)
-    image   String?
-    timeout DateTime?
+    claimer   String?   @db.Char(18)
+    deliverer String?   @db.Char(18)
+    image     String?
+    timeout   DateTime?
 }
 
 enum OrderStatus {
@@ -36,7 +37,7 @@ enum OrderStatus {
 }
 
 model WorkerInfo {
-    id        String   @id @db.VarChar(10)
+    id        String   @id @db.Char(18)
     createdAt DateTime @default(now())
 
     preparations Int @default(0)
