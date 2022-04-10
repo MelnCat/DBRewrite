@@ -21,7 +21,8 @@ import { format } from "../../../utils/string";
 const tcdp = text.commands.deliverymessage.placeholders;
 const placeholderMessage = `${tcdp.title}\n${Object.entries(tcdp.list)
 	.sort((a, b) => requiredOrderPlaceholders.includes(b[0]) ? 1 : -1)
-	.map(([k, v]) => format(requiredOrderPlaceholders.includes(k) ? tcdp.requiredFormat : tcdp.format, k, v))}`;
+	.map(([k, v]) => format(requiredOrderPlaceholders.includes(k) ? tcdp.requiredFormat : tcdp.format, k, v))
+	.join("\n")}`;
 
 export const command = new Command("deliverymessage", "Configures your delivery message.")
 	.addPermission(permissions.employee)
