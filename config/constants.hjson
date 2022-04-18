@@ -4,4 +4,11 @@
 		20000 // 20 seconds
 		90000 // 1.5 minutes
 	]
+	work: {
+		amountRange: [
+			1
+			25
+		]
+		cooldownMs: 300000 // 5 minutes
+	}
 }

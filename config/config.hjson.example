@@ -15,5 +15,7 @@
 	channels: {
 		brewery: ""
 		delivery: ""
+		feedback: ""
+		tips: ""
 	}
 }

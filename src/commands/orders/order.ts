@@ -1,5 +1,5 @@
 import { db } from "../../database/database";
-import { generateOrderId, hasActiveOrder } from "../../database/orders";
+import { generateOrderId, hasActiveOrder } from "../../database/order";
 import { text } from "../../providers/config";
 import { Command } from "../../structures/Command";
 import { format } from "../../utils/string";

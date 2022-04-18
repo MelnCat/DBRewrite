@@ -44,6 +44,7 @@ const textSchema = z
 			noActiveOrder: z.string(),
 			noClaimedOrder: z.string(),
 			identified: nFormattable("name", "id"),
+			noOrders: z.string(),
 			orderEmbed: z.object({
 				title: pFormattable(),
 				description: pFormattable(),
@@ -58,6 +59,8 @@ const textSchema = z
 					orderedAt: z.string()
 				}),
 			}),
+			invalidNatural: z.string(),
+			notEnoughBalance: z.string(),
 		}),
 		commands: z.object({
 			order: z.object({
@@ -106,10 +109,34 @@ const textSchema = z
 					list: z.record(z.string(), z.string())
 				})
 			}),
+			balance: z.object({
+				success: pFormattable()
+			}),
+			work: z.object({
+				responses: z.array(pFormattable())
+			}),
+			feedback: z.object({
+				success: pFormattable(),
+				alreadyGiven: z.string(),
+				embed: z.object({
+					title: pFormattable(),
+					footer: pFormattable(),
+				})
+			}),
+			tip: z.object({
+				success: pFormattable(2),
+				alreadyTipped: z.string(),
+				embed: z.object({
+					title: z.string(),
+					description: pFormattable(4),
+					footer: pFormattable()
+				})
+			}),
 		}),
 		errors: z.object({
 			unauthorized: pFormattable(),
 			exception: z.string(),
+			cooldown: pFormattable(),
 		}),
 	})
 	.strict();
@@ -127,6 +154,8 @@ const configSchema = z
 		channels: z.object({
 			brewery: snowflake,
 			delivery: snowflake,
+			feedback: snowflake,
+			tips: snowflake,
 		})
 	})
 	.strict();
@@ -134,7 +163,11 @@ const configSchema = z
 const constantsSchema = z
 	.object({
 		interactionExpiryTimeMs: z.number(),
-		brewTimeRangeMs: z.tuple([z.number(), z.number()])
+		brewTimeRangeMs: z.tuple([z.number(), z.number()]),
+		work: z.object({
+			amountRange: z.tuple([z.number(), z.number()]),
+			cooldownMs: z.number()
+		})
 	})
 	.strict();
 

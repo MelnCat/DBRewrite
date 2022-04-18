@@ -9,7 +9,7 @@ import {
 	matchOrderStatus,
 	orderPlaceholders,
 	requiredOrderPlaceholders,
-} from "../../../database/orders";
+} from "../../../database/order";
 import { getWorkerInfo, upsertWorkerInfo } from "../../../database/workerInfo";
 import { client } from "../../../providers/client";
 import { config, text } from "../../../providers/config";

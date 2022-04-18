@@ -1,6 +1,6 @@
 import { OrderStatus } from "@prisma/client";
 import { db } from "../../../database/database";
-import { generateOrderId, getClaimedOrder, hasActiveOrder, matchActiveOrder, matchOrderStatus, orderEmbedAsync } from "../../../database/orders";
+import { generateOrderId, getClaimedOrder, hasActiveOrder, matchActiveOrder, matchOrderStatus, orderEmbedAsync } from "../../../database/order";
 import { client } from "../../../providers/client";
 import { config, text } from "../../../providers/config";
 import { mainGuild } from "../../../providers/discord";

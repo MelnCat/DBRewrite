@@ -1,5 +1,5 @@
 import { db } from "../../../database/database";
-import { generateOrderId, getAllActiveOrders, hasActiveOrder } from "../../../database/orders";
+import { generateOrderId, getAllActiveOrders, hasActiveOrder } from "../../../database/order";
 import { client } from "../../../providers/client";
 import { config, text } from "../../../providers/config";
 import { mainGuild } from "../../../providers/discord";

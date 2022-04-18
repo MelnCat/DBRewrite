@@ -21,6 +21,11 @@ model Order {
     deliverer String?   @db.Char(18)
     image     String?
     timeout   DateTime?
+
+    // 0bAB
+    // A - Feedback Given
+    // B - Tipped
+    flags Int @default(0)
 }
 
 enum OrderStatus {
@@ -44,4 +49,11 @@ model WorkerInfo {
     deliveries   Int @default(0)
 
     deliveryMessage String?
+}
+
+model UserInfo {
+    id        String   @id @db.Char(18)
+    createdAt DateTime @default(now())
+
+    balance Int @default(0)
 }

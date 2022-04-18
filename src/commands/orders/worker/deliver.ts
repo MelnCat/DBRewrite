@@ -1,7 +1,7 @@
 import { OrderStatus } from "@prisma/client";
 import { CategoryChannel, GuildChannel } from "discord.js";
 import { db } from "../../../database/database";
-import { generateOrderId, getClaimedOrder, hasActiveOrder, matchActiveOrder, matchOrderStatus, orderPlaceholders } from "../../../database/orders";
+import { generateOrderId, getClaimedOrder, hasActiveOrder, matchActiveOrder, matchOrderStatus, orderPlaceholders } from "../../../database/order";
 import { getWorkerInfo, upsertWorkerInfo } from "../../../database/workerInfo";
 import { client } from "../../../providers/client";
 import { config, text } from "../../../providers/config";

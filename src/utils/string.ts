@@ -17,7 +17,7 @@ type Placeholder = string | number;
 type FormatArguments<T extends string> = A.Equals<T, string> extends 1
 	? Placeholder[] | Record<string, Placeholder>[]
 	: N.Greater<CountStr<T, "{}">, 0> extends 1
-	? L.Repeat<string, CountStr<T, "{}">>
+	? L.Repeat<Placeholder, CountStr<T, "{}">>
 	: N.Greater<CountStr<T, `{${string}}`>, 0> extends 1
 	? [Record<ExtractPlaceholders<T>[number], Placeholder>]
 	: string[] | [Record<string, Placeholder>];

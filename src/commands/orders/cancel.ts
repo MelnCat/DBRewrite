@@ -1,6 +1,6 @@
 import { OrderStatus } from "@prisma/client";
 import { db } from "../../database/database";
-import { generateOrderId, getUserActiveOrder, hasActiveOrder } from "../../database/orders";
+import { generateOrderId, getUserActiveOrder, hasActiveOrder } from "../../database/order";
 import { text } from "../../providers/config";
 import { Command } from "../../structures/Command";
 import { format } from "../../utils/string";

@@ -64,6 +64,9 @@ export const getClaimedOrder = async (user: UserResolvable) =>
 export const getOrder = async (id: string) =>
 	db.order.findFirst({ where: { id } });
 
+export const getLatestOrder = async (user: UserResolvable) =>
+	db.order.findFirst({ where: { user: resolveUserId(user), status: OrderStatus.Delivered }, orderBy: { createdAt: "desc" } });
+
 const embedText = text.common.orderEmbed;
 
 const rawOrderEmbed = (order: Order) =>
@@ -141,3 +144,8 @@ export const orderPlaceholders = async(order: Order) => Object.assign(Object.cre
 	user: formatUser((await client.users.fetch(order.user).catch(nulli)) ?? order.user),
 	image: order.image ?? "No image was found, this is very bad."
 });
+
+export const OrderFlags = {
+	FeedbackGiven: 0b1,
+	Tipped: 0b10,
+};

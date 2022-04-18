@@ -1,6 +1,6 @@
 import { OrderStatus } from "@prisma/client";
 import { db } from "../../../database/database";
-import { generateOrderId, getClaimedOrder, hasActiveOrder, matchActiveOrder, matchOrderStatus } from "../../../database/orders";
+import { generateOrderId, getClaimedOrder, hasActiveOrder, matchActiveOrder, matchOrderStatus } from "../../../database/order";
 import { upsertWorkerInfo } from "../../../database/workerInfo";
 import { client } from "../../../providers/client";
 import { config, constants, text } from "../../../providers/config";
@@ -8,6 +8,7 @@ import { mainGuild } from "../../../providers/discord";
 import { permissions } from "../../../providers/permissions";
 import { Command } from "../../../structures/Command";
 import { format } from "../../../utils/string";
+import { randRange } from "../../../utils/utils";
 
 export const command = new Command("brew", "Brews your claimed order.")
 	.addPermission(permissions.employee)
@@ -23,9 +24,7 @@ export const command = new Command("brew", "Brews your claimed order.")
 			await int.reply(text.commands.brew.invalidUrl);
 			return;
 		}
-		const time =
-			constants.brewTimeRangeMs[0] +
-			Math.floor(Math.random() * (constants.brewTimeRangeMs[1] - constants.brewTimeRangeMs[0]));
+		const time = randRange(...constants.brewTimeRangeMs);
 		await db.order.update({
 			where: {
 				id: order.id,

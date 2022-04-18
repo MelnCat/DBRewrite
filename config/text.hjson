@@ -14,6 +14,7 @@
 		invalidOrderId: "[no] No order was found by that ID. Try checking your capitalization and numbers."
 		noActiveOrder: "[no] You do not have an active order. Order one with `/order`!"
 		noClaimedOrder: "[no] You do not have an order claimed currently."
+		noOrders: "[no] You have not any orders yet."
 		identified: **{name}** (`{id}`)
 		orderEmbed: {
 			title: Order Information for `{}`
@@ -29,6 +30,8 @@
 				orderedAt: ⏰ Ordered At
 			}
 		}
+		invalidNatural: "[no] Invalid number provided. The number must be an integer greater than 0."
+		notEnoughBalance: "[no] You do not have enough money."
 	}
 	commands: {
 		order: {
@@ -102,9 +105,54 @@
 				}
 			}
 		}
+		balance: {
+			success: You currently have `${}`.
+		}
+		work: {
+			responses: [
+				Grass isn't real, but the {} you received is.
+				You detonated a mountain, and sold the remains for {}.
+				You sold a piece of paper for {}.
+				You took a shower, and got {}.
+				You made grass become real, and got {} in return.
+				You watched a movie, and got {}.
+				You printed out {} from your printer.
+				You slayed a dragon, and got paid {}.
+				Time travelers from the future brought {} to save their timeline.
+				You called a taxi instead of drunk driving. You got {}.
+				Citywide riot ensues. You defend your local bar. You got {}.
+				Citywide riot ensues. You loot your local bar. You got {}.
+				Citywide riot ensues. You order beer from a bunker. You got {}.
+				You liquidate your assets and invest in Discord Bartender. You got {}.
+				You identified a bug in the Discord Bartender bot, and reported it. You got {} in return.
+				You identified a bug in the Discord Bartender bot, and exploited it to get {}.
+				You act like you belong at the police station, and got {}.
+				You voted in your local election, and got {}.
+				Break room is magically blessed. You got {}.
+				You attempt to summon a demon, but all that appears are piles of cash. You got {}.
+			]
+		}
+		feedback: {
+			success: "[yes] You have successfully given feedback on your order of `{}`."
+			alreadyGiven: "[no] You have already given feedback on your previous order. Try ordering another."
+			embed: {
+				title: Feedback Given For `{}`
+				footer: By {}
+			}
+		}
+		tip: {
+			success: "[yes] You have successfully tipped `${}` on your order of `{}`."
+			alreadyTipped: "[no] You have already tipped your previous order. Try ordering another."
+			embed: {
+				title: Tip Received!
+				description: The order `{}` was tipped `${}`. The tip has been added to {} and {}'s balances.
+				footer: By {}
+			}
+		}
 	}
 	errors: {
 		exception: ":electric_plug: An internal error has occurred while running this command. Please report this to the developers of this bot."
 		unauthorized: "[no] You do not have permission to use this command. You must have the `{}` permission."
+		cooldown: ⏰ Please wait `{}` before using this command again.
 	}
 }

@@ -8,7 +8,7 @@ import {
 	matchActiveOrder,
 	matchOrderStatus,
 	orderEmbedAsync,
-} from "../../../database/orders";
+} from "../../../database/order";
 import { client } from "../../../providers/client";
 import { config, text } from "../../../providers/config";
 import { mainGuild } from "../../../providers/discord";
