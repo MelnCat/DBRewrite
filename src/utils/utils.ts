@@ -37,6 +37,7 @@ export const typedEntries = <T extends object>(obj: T) =>
 export const typedFromEntries = <K extends string | number | symbol, V>(arr: readonly (readonly [K, V])[]) =>
 	Object.fromEntries(arr) as { [k in K]: V };
 
+export const typedKeys = <T extends object>(obj: T) => Object.keys(obj) as (keyof T)[];
 export const sampleArray = <T>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
 
 export const randRange = (lowerInclusive: number, upperExclusive: number) =>

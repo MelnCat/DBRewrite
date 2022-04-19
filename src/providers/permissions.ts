@@ -4,6 +4,7 @@ import { z } from "zod";
 import { StopCommandExecution } from "../utils/error";
 import { resolveUserId } from "../utils/id";
 import { format, parseText } from "../utils/string";
+import { typedFromEntries, typedKeys } from "../utils/utils";
 import { config, parseHjson, snowflake, text } from "./config";
 import { mainGuild } from "./discord";
 
@@ -42,9 +43,10 @@ export class Permission {
 		if (user in this.users) return this.users[user];
 		try {
 			const member = await mainGuild.members.fetch(ur).catch(() => null);
-			if (member) for (const role of member.roles.cache.keys()) {
-				if (role in this.roles) return this.roles[role];
-			}
+			if (member)
+				for (const role of member.roles.cache.keys()) {
+					if (role in this.roles) return this.roles[role];
+				}
 		} catch (e) {
 			if (!(e instanceof DiscordAPIError)) throw e;
 		}
@@ -62,8 +64,8 @@ export class Permission {
 	}
 }
 
-export const permissionsArray = Object.keys(parsed).map(k => new Permission(k));
-export const permissions = Object.fromEntries(permissionsArray.map(x => [x.name, x]));
+export const permissionsArray = typedKeys(parsed).map(k => new Permission(k));
+export const permissions = typedFromEntries(permissionsArray.map(x => [x.name, x])) as Record<keyof typeof parsed, Permission>;
 
 for (const [i, v] of Object.values(parsed).entries()) {
 	const perm = permissionsArray[i];

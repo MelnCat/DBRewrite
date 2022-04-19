@@ -2,14 +2,14 @@ import type { GuildEmoji, TextBasedChannel } from "discord.js";
 import { client } from "../providers/client";
 import { loadCommands } from "../providers/commandManager";
 import { config, text } from "../providers/config";
-import { mainChannels, mainEmojis, mainGuild, setMainGuild } from "../providers/discord";
+import { mainChannels, mainEmojis, mainGuild, setMainGuild, setMainRoles } from "../providers/discord";
 import { startOrderTimeoutChecks } from "../providers/orderManager";
 import { IllegalStateError } from "../utils/error";
 import { parseText } from "../utils/string";
-import { isNotInitialized } from "../utils/utils";
+import { isNotInitialized, typedEntries, typedFromEntries } from "../utils/utils";
 
 type TextObject = {
-	[k: string]: string | TextObject;
+	[k: string]: string | string[] | TextObject;
 };
 
 client.on("ready", async () => {
@@ -17,6 +17,19 @@ client.on("ready", async () => {
 	console.log(`Bot up as ${client.user.tag}!`);
 	loadCommands();
 	if (isNotInitialized(mainGuild)) setMainGuild(await client.guilds.fetch(config.mainServer));
+	setMainRoles(
+		typedFromEntries(
+			await Promise.all(
+				typedEntries(config.roles).map(async x => [
+					x[0],
+					(await mainGuild.roles.fetch(x[1])) ??
+						(() => {
+							throw new IllegalStateError(`Role ${x[0]} was not found.`);
+						})(),
+				])
+			)
+		)
+	);
 	for (const ch in mainChannels) {
 		if (isNotInitialized(mainChannels[ch as keyof typeof mainChannels])) {
 			const channel = await client.channels.fetch(config.channels[ch as keyof typeof config["channels"]]);

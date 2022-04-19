@@ -22,6 +22,10 @@ export const command = new Command("claim", "Claims an order.")
 			await int.reply(text.common.invalidOrderId);
 			return;
 		}
+		if (order.user === int.user.id && !permissions.developer.hasPermission(int.user)) {
+			await int.reply(text.common.interactOwn);
+			return;
+		}
 		await db.order.update({ where: { id: order.id }, data: { claimer: int.user.id, status: OrderStatus.Preparing } });
 		await int.reply(text.commands.claim.success);
 	});

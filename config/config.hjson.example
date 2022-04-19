@@ -11,6 +11,7 @@
 	}
 	roles: {
 		employee: ""
+		duty: ""
 	}
 	channels: {
 		brewery: ""

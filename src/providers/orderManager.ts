@@ -1,5 +1,7 @@
 import { OrderStatus } from "@prisma/client";
 import { db } from "../database/database";
+import { format } from "../utils/string";
+import { text } from "./config";
 import { mainChannels } from "./discord";
 
 export const startOrderTimeoutChecks = () => {
@@ -10,10 +12,15 @@ export const startOrderTimeoutChecks = () => {
 			data: { timeout: null, status: OrderStatus.PendingDelivery },
 		});
 		if (brewFinished.length) {
+			const plural = brewFinished.length > 1;
 			await mainChannels.delivery.send(
-				`The order${brewFinished.length > 1 ? "s" : ""} ${brewFinished.map(
-					x => `\`${x.id}\``
-				).join(", ")} have finished brewing and are now available for delivery.`
+				format(
+					text.commands.brew.ready,
+					plural ? "s" : "",
+					brewFinished.map(x => `\`${x.id}\``).join(", "),
+					plural ? "have" : "has",
+					plural ? "are" : "is"
+				)
 			);
 		}
 	}, 5000);

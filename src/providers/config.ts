@@ -61,11 +61,13 @@ const textSchema = z
 			}),
 			invalidNatural: z.string(),
 			notEnoughBalance: z.string(),
+			interactOwn: z.string(),
 		}),
 		commands: z.object({
 			order: z.object({
 				success: nFormattable("details", "id"),
 				exists: z.string(),
+				created: nFormattable("details", "duty", "id", "tag"),
 			}),
 			list: z.object({
 				title: z.string(),
@@ -89,6 +91,7 @@ const textSchema = z
 			brew: z.object({
 				invalidUrl: z.string(),
 				success: z.string(),
+				ready: pFormattable(4)
 			}),
 			deliver: z.object({
 				noMessage: z.string(),
@@ -150,6 +153,7 @@ const configSchema = z
 		emojis: z.record(z.string(), snowflake),
 		roles: z.object({
 			employee: snowflake,
+			duty: snowflake,
 		}),
 		channels: z.object({
 			brewery: snowflake,

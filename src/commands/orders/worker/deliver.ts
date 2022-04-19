@@ -20,6 +20,10 @@ export const command = new Command("deliver", "Delivers an order.")
 			await int.reply(text.common.invalidOrderId);
 			return;
 		}
+		if (order.user === int.user.id && !permissions.developer.hasPermission(int.user)) {
+			await int.reply(text.common.interactOwn);
+			return;
+		}
 		const info = await upsertWorkerInfo(int.user);
 		await db.workerInfo.update({
 			where: {
