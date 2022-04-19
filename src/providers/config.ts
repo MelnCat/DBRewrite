@@ -62,6 +62,7 @@ const textSchema = z
 			invalidNatural: z.string(),
 			notEnoughBalance: z.string(),
 			interactOwn: z.string(),
+			mainGuildOnly: z.string(),
 		}),
 		commands: z.object({
 			order: z.object({
@@ -134,6 +135,10 @@ const textSchema = z
 					description: pFormattable(4),
 					footer: pFormattable()
 				})
+			}),
+			duty: z.object({
+				enabled: z.string(),
+				disabled: z.string(),
 			}),
 		}),
 		errors: z.object({

@@ -33,6 +33,7 @@
 		invalidNatural: "[no] Invalid number provided. The number must be an integer greater than 0."
 		notEnoughBalance: "[no] You do not have enough money."
 		interactOwn: "[no] You cannot interact with your own orders."
+		mainGuildOnly: "[no] This command can only be used in the main server."
 	}
 	commands: {
 		order: {
@@ -151,6 +152,10 @@
 				description: The order `{}` was tipped `${}`. The tip has been added to {} and {}'s balances.
 				footer: By {}
 			}
+		}
+		duty: {
+			enabled: "[yes] You are now on duty!"
+			disabled: "[yes] You are no longer on duty!"
 		}
 	}
 	errors: {
