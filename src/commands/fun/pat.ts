@@ -21,4 +21,4 @@ export const command = new Command("pat", "Give your friends a good Pat.")
 					
 			],
 		});
-	});
+	}); 

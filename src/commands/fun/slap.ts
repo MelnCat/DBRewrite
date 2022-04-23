@@ -7,15 +7,18 @@ import { format } from "../../utils/string";
 export const command = new Command("slap", "Give your friends a good slap.")
 	.addOption("string", o => o.setName("slap").setDescription("Slap your friends.").setRequired(true))
 	.setExecutor(async int => {
+		const nekos = new Client();
+    const yeeeee = await nekos.sfw.slap();
 		const slapped = int.options.getString("slap", true);
 		const tcfe = text.commands.feedback.embed;
 		await int.reply({
 			embeds: [
 				new MessageEmbed()
 					.setTitle("Bam someone got slapped")
+					.setImage(yeeeee.url)
 					.setDescription(`${slapped} got slapped by ${int.user.tag}`)
 					.setFooter({ text: format(tcfe.footer, int.user.tag), iconURL: int.user.displayAvatarURL() }),
 					
 			],
 		});
-	});
+	});  

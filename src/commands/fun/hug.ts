@@ -21,4 +21,4 @@ export const command = new Command("hug", "Give your friends a good hug.")
 					
 			],
 		});
-	});
+	}); 

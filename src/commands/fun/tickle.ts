@@ -21,4 +21,4 @@ export const command = new Command("tickle", "Tickle your friends.")
 					
 			],
 		});
-	});
+	}); 
