@@ -157,6 +157,9 @@
 			enabled: "[yes] You are now on duty!"
 			disabled: "[yes] You are no longer on duty!"
 		}
+		slap: {
+			default: "HAH YOU GOT SLAPPED"
+		}
 	}
 	errors: {
 		exception: ":electric_plug: An internal error has occurred while running this command. Please report this to the developers of this bot."
