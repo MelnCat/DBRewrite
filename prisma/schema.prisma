@@ -22,6 +22,8 @@ model Order {
     image     String?
     timeout   DateTime?
 
+    deleteReason String?
+
     // 0bAB
     // A - Feedback Given
     // B - Tipped
