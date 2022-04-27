@@ -140,6 +140,10 @@ const textSchema = z
 				enabled: z.string(),
 				disabled: z.string(),
 			}),
+			delete: z.object({
+				success: z.string(),
+				dm: pFormattable(2)
+			}),
 		}),
 		errors: z.object({
 			unauthorized: pFormattable(),
