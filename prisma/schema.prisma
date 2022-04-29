@@ -59,3 +59,10 @@ model UserInfo {
 
     balance Int @default(0)
 }
+
+model Blacklist {
+    id          String   @id @db.Char(18)
+    createdAt   DateTime @default(now())
+    reason      String
+    blacklister String   @db.Char(18)
+}

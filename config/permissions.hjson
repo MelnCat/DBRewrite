@@ -23,4 +23,9 @@
 			employee: true
 		}
 	}
+	moderator: {
+		roles: {
+			moderator: true
+		}
+	}
 }

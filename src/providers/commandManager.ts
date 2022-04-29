@@ -34,15 +34,15 @@ export let applicationCommandManager:
 const registerCommands = async (commands: Command[]) => {
 	if (!client.isReady()) throw new Error("registerCommands called before client was ready.");
 	applicationCommandManager = development ? mainGuild.commands : client.application!.commands;
-	const route = development
-		? Routes.applicationGuildCommands(client.application.id, config.mainServer)
-		: Routes.applicationCommands(client.application.id);
-	await rest.put(route, { body: commands.map(x => x.toJSON()) });
+	const global = development ? [] : commands.filter(x => !x.local);
+	const local = development ? commands : commands.filter(x => x.local);
+	await rest.put(Routes.applicationCommands(client.application.id), { body: global.map(x => x.toJSON()) });
+	await rest.put(Routes.applicationGuildCommands(client.application.id, config.mainServer), {
+		body: local.map(x => x.toJSON()),
+	});
 	commands.forEach(x => commandRegistry.set(x.name, x));
 	for (const cmd of (await applicationCommandManager.fetch({})).values()) {
 		applicationCommandRegistry.set(cmd.name, cmd);
-		// TODO make this work, wait until discord makes permissions better
-		// await cmd.permissions.add({ permissions: commandRegistry.get(cmd.name)?.permissions ?? [] });
 	}
 };
 export const loadCommands = async (): Promise<Command[]> => {

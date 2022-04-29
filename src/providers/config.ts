@@ -56,7 +56,7 @@ const textSchema = z
 					channel: z.string(),
 					guild: z.string(),
 					claimer: z.string(),
-					orderedAt: z.string()
+					orderedAt: z.string(),
 				}),
 			}),
 			invalidNatural: z.string(),
@@ -92,7 +92,7 @@ const textSchema = z
 			brew: z.object({
 				invalidUrl: z.string(),
 				success: z.string(),
-				ready: pFormattable(4)
+				ready: pFormattable(4),
 			}),
 			deliver: z.object({
 				noMessage: z.string(),
@@ -110,14 +110,14 @@ const textSchema = z
 					title: z.string(),
 					format: z.string(),
 					requiredFormat: z.string(),
-					list: z.record(z.string(), z.string())
-				})
+					list: z.record(z.string(), z.string()),
+				}),
 			}),
 			balance: z.object({
-				success: pFormattable()
+				success: pFormattable(),
 			}),
 			work: z.object({
-				responses: z.array(pFormattable())
+				responses: z.array(pFormattable()),
 			}),
 			feedback: z.object({
 				success: pFormattable(),
@@ -125,7 +125,7 @@ const textSchema = z
 				embed: z.object({
 					title: pFormattable(),
 					footer: pFormattable(),
-				})
+				}),
 			}),
 			tip: z.object({
 				success: pFormattable(2),
@@ -133,8 +133,8 @@ const textSchema = z
 				embed: z.object({
 					title: z.string(),
 					description: pFormattable(4),
-					footer: pFormattable()
-				})
+					footer: pFormattable(),
+				}),
 			}),
 			duty: z.object({
 				enabled: z.string(),
@@ -142,13 +142,22 @@ const textSchema = z
 			}),
 			delete: z.object({
 				success: z.string(),
-				dm: pFormattable(2)
+				dm: pFormattable(2),
+			}),
+			blacklist: z.object({
+				success: z.string(),
+				existing: z.string(),
+				remove: z.object({
+					success: z.string(),
+					existing: z.string(),
+				}),
 			}),
 		}),
 		errors: z.object({
 			unauthorized: pFormattable(),
 			exception: z.string(),
 			cooldown: pFormattable(),
+			blacklisted: z.string(),
 		}),
 	})
 	.strict();
@@ -163,13 +172,14 @@ const configSchema = z
 		roles: z.object({
 			employee: snowflake,
 			duty: snowflake,
+			moderator: snowflake,
 		}),
 		channels: z.object({
 			brewery: snowflake,
 			delivery: snowflake,
 			feedback: snowflake,
 			tips: snowflake,
-		})
+		}),
 	})
 	.strict();
 
@@ -179,8 +189,8 @@ const constantsSchema = z
 		brewTimeRangeMs: z.tuple([z.number(), z.number()]),
 		work: z.object({
 			amountRange: z.tuple([z.number(), z.number()]),
-			cooldownMs: z.number()
-		})
+			cooldownMs: z.number(),
+		}),
 	})
 	.strict();
 

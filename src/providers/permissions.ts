@@ -19,6 +19,7 @@ const permissionsSchema = z
 	.object({
 		developer: permissionSchema,
 		employee: permissionSchema,
+		moderator: permissionSchema,
 	})
 	.strict();
 

@@ -21,7 +21,6 @@ import { randRange, sampleArray } from "../../utils/utils";
 const cooldowns: Record<string, number> = {};
 
 export const command = new Command("work", "Gets you some money.")
-	.addPermission(permissions.employee)
 	.setExecutor(async int => {
 		if (int.user.id in cooldowns && cooldowns[int.user.id] >= Date.now()) {
 			await int.reply(

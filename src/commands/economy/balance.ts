@@ -10,7 +10,6 @@ import { Command } from "../../structures/Command";
 import { format } from "../../utils/string";
 
 export const command = new Command("balance", "Checks your balance.")
-	.addPermission(permissions.employee)
 	.setExecutor(async int => {
 		const info = await getUserInfo(int.user);
 		await int.reply(format(text.commands.balance.success, info?.balance ?? 0));

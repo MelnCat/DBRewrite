@@ -18,6 +18,7 @@ export class Command {
 	accessible = true;
 	executor: CommandExecutor = i => i.reply("No executor was specified.");
 	permissions: Permission[] = [];
+	local = false;
 
 	constructor(public readonly name: string, public readonly description = "") {
 		this.#slash.setName(this.name).setDescription(this.description).setDefaultPermission(true);
@@ -53,6 +54,11 @@ export class Command {
 
 	addPermission(permission: Permission) {
 		this.permissions.push(permission);
+		return this;
+	}
+
+	setLocal(local: boolean) {
+		this.local = local;
 		return this;
 	}
 
