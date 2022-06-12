@@ -1,0 +1,49 @@
+Bot Config setup:
+- Go to the config directory Then,
+
+- Copy the config.hsjon.example file Then rename it to just
+"config.hsjson" Then, go into the file put your token into the "" Then,
+- Your main server ID is put into the "" Then,
+- For your Database URL keep the first line the same, like this - postgresql://Username:password@localhost:5432/DBName?schema=public Then,
+- make sure you include the 2 emoji ids!
+Next,  
+
+Starting the bot:
+Run These commands: Might only need to run these once Before Starting the bot
+- "yarn prisma:generate" // You'll need to Do this After you edit the schema.prisma File
+- "yarn prisma:push" // You'll use this to make the Database you defined Before startup
+Then,
+- To start the bot go to the dist directory and start "index.js" with pm2
+
+Extra:
+And, use "node genenv" To generate something
+In the prisma Directory Open up the schema.prisma With VSC (or any type of editor you use)
+
+Keep everything default But, under the provider = prisma-client-js
+Put binaryTargets ["native", "Type"]
+
+You'll get an error Anyways So you'll know what to Replace the "type" with
+Then, load up the bot and see if you get any errors!
+
+If you want to go into Production mode/ Back to development Mode Use the a ecosystem file: 
+
+TEMPLATE:
+``
+module.exports = {
+  apps : [{
+    name: "DBRewrite",
+    script: "node dist",
+    env: {
+      NODE_ENV: "development",
+    },
+    env_production: {
+      NODE_ENV: "production",
+    }
+  }]
+}
+
+``
+Commands: (Use the Production Command for global commands) To Restart replace start with restart
+ 
+- start pm2 ecosystem.config.js --env production
+- start pm2 ecosystem.config.js --env development
