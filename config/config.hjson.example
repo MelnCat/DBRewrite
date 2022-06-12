@@ -1,10 +1,9 @@
 {
-	token: ""
+	token: "" 
 	mainServer: "snowflake"
-	databaseUrl: postgresql://username:hunter2@localhost:5432/mydb?schema=public
-	developers: [
-		"413143886702313472"
-	]
+	
+	databaseUrl: postgresql://user:password@localhost:/mydb?schema=public
+	developers: []
 	emojis: {
 		yes: ""
 		no: ""
@@ -15,7 +14,7 @@
 		duty: ""
 	}
 	channels: {
-		brewery: ""
+		brewery: "" 
 		delivery: ""
 		feedback: ""
 		tips: ""
