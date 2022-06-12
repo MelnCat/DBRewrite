@@ -1,0 +1,92 @@
+Step 1:
+- sudo apt update
+
+Step 2:
+- sudo apt install postgresql postgresql-contrib -y
+- sudo apt-get install php-mysql
+- sudo apt install apache2 php php-curl php-cli php-pgsql php-gd -y
+Step 3:
+- sudo mkdir /usr/share/adminer
+
+- sudo wget "http://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php
+
+- sudo ln -s /usr/share/adminer/latest.php /usr/share/adminer/adminer.php
+
+- echo "Alias /adminer.php /usr/share/adminer/adminer.php" | sudo tee /etc/apache2/conf-available/adminer.conf
+
+- sudo a2enconf adminer.conf
+
+Step 4:
+
+- sudo service apache2 restart
+
+Step 5:
+- sudo su - postgres 
+- createuser <username> -sPr 
+- Setup a password 
+- Enter it again
+
+To Exit postgres Type "exit"
+
+Step 6:
+
+- sudo service postgresql start
+
+Step 7: 
+
+Goto:
+- http://localhost/adminer.php
+- Change System to postgres 
+- Login with your username/Pass
+
+Step 8: if it says pass fails Go to:
+
+cd /etc/postgresql/13/main
+- and do sudo vim pg_hba.conf
+- Scroll All the way down 
+- Host all all 127.0.01/32 Edit the line to trust
+- And the other one below as well.
+- To Edit type "i"
+- when your done press esc 
+- & type :x!
+Then, Do: sudo service postgresql restart
+And you should be able to login! Congrats!
+// Extra 
+When you turn off your computer database goes off So,
+When you get back onto your computer Open up ubuntu
+& use: sudo service postgresql start && sudo service apache2 start
+
+Now if you want to use Pm2 on your linux version install You'll need these: (i copied from my list for extra stuff )
+
+-- NVM 
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash  < Install 
+
+nvm --version // Shows current nvm version
+
+nvm current // Shows what node version you're using 
+
+nvm ls-remote  // Shows all versions
+
+nvm install 17 // Installs The Version you specified
+
+nvm use 17 // Sets your Node to this version~
+
+-- YARN 
+
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -    <
+
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list <
+
+sudo apt-get update  <
+sudo apt-get install yarn <
+
+-- TYPESCRIPT
+
+sudo apt install node-typescript 
+ Or
+yarn add typescript -g 
+
+--PM2 
+npm install -g pm2 
+
+
