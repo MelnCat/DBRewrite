@@ -86,6 +86,9 @@ const textSchema = z
 				existing: z.string(),
 				success: z.string(),
 			}),
+			unclaim: z.object({
+				success: z.string(),
+			}),
 			cancel: z.object({
 				success: z.string(),
 			}),
@@ -117,6 +120,9 @@ const textSchema = z
 				success: pFormattable(),
 			}),
 			work: z.object({
+				responses: z.array(pFormattable()),
+			}),
+			daily: z.object({
 				responses: z.array(pFormattable()),
 			}),
 			feedback: z.object({
@@ -188,6 +194,10 @@ const constantsSchema = z
 		interactionExpiryTimeMs: z.number(),
 		brewTimeRangeMs: z.tuple([z.number(), z.number()]),
 		work: z.object({
+			amountRange: z.tuple([z.number(), z.number()]),
+			cooldownMs: z.number(),
+		}),
+		daily: z.object({
 			amountRange: z.tuple([z.number(), z.number()]),
 			cooldownMs: z.number(),
 		}),

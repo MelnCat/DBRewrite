@@ -1,7 +1,7 @@
 {
 	bot: {
 		status: {
-			name: "name here"
+			name: "We are online! Use slash cmds to order /order <description> & You get money through /work"
 			// Can be either COMPETING, LISTENING, PLAYING, STREAMING, or WATCHING.
 			type: PLAYING
 		}
@@ -57,13 +57,17 @@
 			existing: "[no] You already have an order claimed."
 			success: "[yes] You have successfully claimed the order."
 		}
+		unclaim: {
+			success: "[yes] You have successfully unclaimed the order."
+
+		}
 		cancel: {
 			success: "[yes] Your order has been successfully cancelled."
 		}
 		brew: {
 			invalidUrl: "[no] Please specify a valid URL."
 			success: "[yes] The order is now brewing."
-			ready: The order{} {} ha{} finished brewing and {} now available for delivery.
+			ready:  The order{} {} {} finished brewing and {} now available for delivery.
 		}
 		deliver: {
 			noMessage: ⚠️ You do not have a delivery message set, and the default message was used. Make to set one with `/deliverymessage`!
@@ -134,6 +138,14 @@
 				You voted in your local election, and got {}.
 				Break room is magically blessed. You got {}.
 				You attempt to summon a demon, but all that appears are piles of cash. You got {}.
+			]
+		}
+		daily: {
+			responses: [
+				You just got yourself the magical {} amount today.
+				You gained {} today.
+				You flew around the world for the day and earned {}.
+				Your offline bonus is {}.
 			]
 		}
 		feedback: {
