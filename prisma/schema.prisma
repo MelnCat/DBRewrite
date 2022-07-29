@@ -11,14 +11,14 @@ datasource db {
 model Order {
     id        String      @id @db.VarChar(10)
     createdAt DateTime    @default(now())
-    user      String      @db.Char(18)
+    user      String      @db.VarChar(20)
     details   String
     status    OrderStatus @default(Unprepared)
-    channel   String      @db.Char(18)
-    guild     String      @db.Char(18)
+    channel   String      @db.VarChar(20)
+    guild     String      @db.VarChar(20)
 
-    claimer   String?   @db.Char(18)
-    deliverer String?   @db.Char(18)
+    claimer   String?   @db.VarChar(20)
+    deliverer String?   @db.VarChar(20)
     image     String?
     timeout   DateTime?
 
@@ -44,7 +44,7 @@ enum OrderStatus {
 }
 
 model WorkerInfo {
-    id        String   @id @db.Char(18)
+    id        String   @id @db.VarChar(20)
     createdAt DateTime @default(now())
 
     preparations Int @default(0)
@@ -54,15 +54,15 @@ model WorkerInfo {
 }
 
 model UserInfo {
-    id        String   @id @db.Char(18)
+    id        String   @id @db.VarChar(20)
     createdAt DateTime @default(now())
 
     balance Int @default(0)
 }
 
 model Blacklist {
-    id          String   @id @db.Char(18)
+    id          String   @id @db.VarChar(20)
     createdAt   DateTime @default(now())
     reason      String
-    blacklister String   @db.Char(18)
+    blacklister String   @db.VarChar(20)
 }
