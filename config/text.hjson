@@ -40,6 +40,7 @@
 			success: "[yes] Your order for **{details}** has been placed! The order ID is `{id}`."
 			exists: "[no] You already have an active order."
 			created: "{duty} An order with the id `{id}` for **{details}** has been placed by {tag}."
+			canned: "An order with the id `{id}` was cancelled!\n Order desc `{details}`\nPlaced by {tag}."
 		}
 		list: {
 			title: **__Current Orders__**
