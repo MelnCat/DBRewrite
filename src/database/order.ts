@@ -1,7 +1,7 @@
 import type { Order } from "@prisma/client";
 import { OrderStatus } from "@prisma/client";
 import type { User, UserResolvable, AnyChannel } from "discord.js";
-import { MessageEmbed, Channel, GuildChannel } from "discord.js";
+import { EmbedBuilder, Channel, GuildChannel } from "discord.js";
 import { client } from "../providers/client";
 import { text } from "../providers/config";
 import { resolveUserId } from "../utils/id";
@@ -70,7 +70,7 @@ export const getLatestOrder = async (user: UserResolvable) =>
 const embedText = text.common.orderEmbed;
 
 const rawOrderEmbed = (order: Order) =>
-	new MessageEmbed()
+	new EmbedBuilder()
 		.setTitle(format(embedText.title, order.id))
 		.setDescription(format(embedText.description, order.id))
 		.addField(embedText.fields.id, `\`${order.id}\``, true)
@@ -135,7 +135,7 @@ export const orderEmbedAsync = async (order: Order) => {
 
 export const requiredOrderPlaceholders = ["mention", "image"];
 
-export const orderPlaceholders = async(order: Order) => Object.assign(Object.create(null), {
+export const orderPlaceholders = async (order: Order) => Object.assign(Object.create(null), {
 	preparer: order.claimer ? formatUser((await client.users.fetch(order.claimer).catch(nulli)) ?? order.claimer) : "Unknown",
 	deliverer: order.deliverer ? formatUser((await client.users.fetch(order.deliverer).catch(nulli)) ?? order.deliverer) : "Unknown",
 	id: order.id,

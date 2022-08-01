@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { db } from "../../database/database";
 import { generateOrderId, getLatestOrder, hasActiveOrder, OrderFlags } from "../../database/order";
 import { text } from "../../providers/config";
@@ -19,12 +19,12 @@ export const command = new Command("feedback", "Give feedback on your last order
 			return;
 		}
 
-		const feedback = int.options.getString("feedback", true);
+		const feedback = int.options.("feedback", true);
 		await int.reply(format(text.commands.feedback.success, lastOrder.details));
 		const tcfe = text.commands.feedback.embed;
 		await mainChannels.feedback.send({
 			embeds: [
-				new MessageEmbed()
+				new EmbedBuilder()
 					.setTitle(format(tcfe.title, lastOrder.id))
 					.setDescription(feedback)
 					.setFooter({ text: format(tcfe.footer, int.user.tag), iconURL: int.user.displayAvatarURL() }),

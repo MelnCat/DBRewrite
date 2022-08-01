@@ -18,8 +18,8 @@ export const command = new Command("claim", "Claims an order.")
 		}
 		//if (await getClaimedOrder(int.user) !== int.user.id)
 		//return int.reply("Sorry you may not claim ur own order.")
-		
-		const match = int.options.getString("order", true); 
+
+		const match = int.options.getString("order", true);
 		const order = await matchOrderStatus(match, OrderStatus.Unprepared);
 		if (order === null) {
 			await int.reply(text.common.invalidOrderId);
@@ -31,5 +31,5 @@ export const command = new Command("claim", "Claims an order.")
 		}
 		await db.order.update({ where: { id: order.id }, data: { claimer: int.user.id, status: OrderStatus.Preparing } });
 		await int.reply(text.commands.claim.success);
-		
+
 	});
