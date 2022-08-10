@@ -1,5 +1,6 @@
 import { OrderStatus } from "@prisma/client";
 import { db } from "../../database/database";
+import { mainChannels } from "../../providers/discord";
 import { generateOrderId, getUserActiveOrder, hasActiveOrder } from "../../database/order";
 import { text } from "../../providers/config";
 import { Command } from "../../structures/Command";
@@ -21,4 +22,5 @@ export const command = new Command("cancel", "Cancels your active order.")
 			},
 		});
 		await int.reply(text.commands.cancel.success);
+		mainChannels.brewery.send(`An order with the id ${order.id}' was cancelled!\n Order desc: ${order.details}\nPlaced by ${int.user}.`);
 	});
