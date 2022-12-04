@@ -55,13 +55,19 @@ And we are always open to hearing suggestions from the community about new featu
 | /delete    | Delete's a order.     | Staff 🛠  |
 
 <br>
-<h4 align="left"> Contributors ✨<h4>
-<img src="https://contributors-img.web.app/image?repo=shadow6060/DBRewrite">
-
-
-<br>
-<br>
-<br>
 <h4 align="left"> 🔗 Links <h4>
 
-[GitHub](https://github.com/shadow6060/DBRewrite) | [Website](https://drunk-bartender.org) | [Patreon](https://www.patreon.com/drunkbartender)| [Discord](https://discord.gg/pY6hNVs) | [Appeals](https://www.drunk-bartender.org/Appeals)
+- [GitHub](https://github.com/shadow6060/DBRewrite)
+<br>
+
+- [Website](https://drunk-bartender.org)
+<br>
+
+- [Patreon](https://www.patreon.com/drunkbartender)
+<br>
+
+- [Discord](https://discord.gg/pY6hNVs)
+<br>
+
+- [Appeals](https://www.drunk-bartender.org/Appeals)
+<br>
