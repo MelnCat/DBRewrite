@@ -1,5 +1,5 @@
 import { REST } from "@discordjs/rest";
-import { Client, GatewayIntentBits, Partials } from "discord.js";
+import { Client } from "discord.js";
 import { config, text } from "./config";
 import { join, posix, win32 } from "path";
 import { sync } from "fast-glob";
@@ -10,12 +10,14 @@ globalThis._$clientLoaded = true;
 
 export const client = new Client<true>({
 	shards: "auto",
-	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
+	intents: ["GuildMembers", "Guilds"],
 	presence: {
 		activities: [text.bot.status],
 		status: production ? "online" : "online",
 	},
-	partials: [Partials.Channel, Partials.User]
+	partials: [
+		"CHANNEL", "USER"
+	]
 });
 
 export const rest = new REST({ version: "9" }).setToken(config.token);

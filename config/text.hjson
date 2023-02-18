@@ -40,7 +40,6 @@
 			success: "[yes] Your order for **{details}** has been placed! The order ID is `{id}`."
 			exists: "[no] You already have an active order."
 			created: "{duty} An order with the id `{id}` for **{details}** has been placed by {tag}."
-			canned: "An order with the id `{id}` was cancelled!\n Order desc `{details}`\nPlaced by {tag}."
 		}
 		list: {
 			title: **__Current Orders__**
@@ -64,11 +63,13 @@
 		}
 		cancel: {
 			success: "[yes] Your order has been successfully cancelled."
+			canned: "An order with the id `{id}` was cancelled!\n Order desc `{details}`\nPlaced by {tag}."
+
 		}
 		brew: {
 			invalidUrl: "[no] Please specify a valid URL."
 			success: "[yes] The order is now brewing."
-			ready:  The order{} {} {} finished brewing and {} now available for delivery.
+			ready:  <@&1054006247457824780>The order{} {} {} finished brewing and {} now available for delivery.
 		}
 		deliver: {
 			noMessage: ⚠️ You do not have a delivery message set, and the default message was used. Make to set one with `/deliverymessage`!
@@ -141,6 +142,28 @@
 				You attempt to summon a demon, but all that appears are piles of cash. You got {}.
 			]
 		}
+		crime: {
+			sucess: [
+				You stole from Drunk Bartender and got {}.
+				You fought an old lady and got {}.
+				You decided to go to the corner shop and rob them you got {}.
+				You robbed an atm and got {}.
+				You robbed Tofu and got {}.
+				a kid spat on you, you got {} for selling it to child predators.
+				You burnt down someones mansion you got {}.
+				You kiddnapped someones dog they needed to pay you {} to get the dog back.
+				You stole someones jewerly you sold it for {}.
+
+			]
+			failure: [
+				You tried to steal from Drunk Bartender and lost {}.
+				You tried to fight an old lady and lost then got robbed for {}.
+				You tried to rob the corner shop and lost {}.
+				You tried robbing an atm and ended up being scammed for {}.
+				You attempted to rob Tofu but ended up being robbed by Tofu for {}.
+				You stole someones purse when they were walking their dog , and the dog started chasing you so you runned from fear. but you dropped her purse and your {} dollars.
+			]
+		}
 		daily: {
 			responses: [
 				You just got yourself the magical {} amount today.
@@ -181,6 +204,16 @@
 				success: "[yes] The ID has been successfully unblacklisted."
 				existing: "[no] The ID is not blacklisted."
 			}
+		}
+		drinkingr: {
+				drinks: [
+				"`Vodka`{}"
+				"`Whiskey`{}"
+				"`Beer`{}"
+				"`Rum`{}"
+				"`Gin`{}"
+				"`Tequila`{}"
+			]
 		}
 	}
 	errors: {

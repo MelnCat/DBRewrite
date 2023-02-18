@@ -125,6 +125,10 @@ const textSchema = z
 			daily: z.object({
 				responses: z.array(pFormattable()),
 			}),
+			crime: z.object({
+				sucess: z.array(pFormattable()),
+				failure: z.array(pFormattable()),
+			}),
 			feedback: z.object({
 				success: pFormattable(),
 				alreadyGiven: z.string(),
@@ -149,6 +153,9 @@ const textSchema = z
 			delete: z.object({
 				success: z.string(),
 				dm: pFormattable(2),
+			}),
+			drinkingr: z.object({
+				drinks: z.array(pFormattable()),
 			}),
 			blacklist: z.object({
 				success: z.string(),
@@ -179,6 +186,7 @@ const configSchema = z
 			employee: snowflake,
 			duty: snowflake,
 			moderator: snowflake,
+			dutyd: snowflake,
 		}),
 		channels: z.object({
 			brewery: snowflake,
@@ -198,6 +206,10 @@ const constantsSchema = z
 			cooldownMs: z.number(),
 		}),
 		daily: z.object({
+			amountRange: z.tuple([z.number(), z.number()]),
+			cooldownMs: z.number(),
+		}),
+		crime: z.object({
 			amountRange: z.tuple([z.number(), z.number()]),
 			cooldownMs: z.number(),
 		}),

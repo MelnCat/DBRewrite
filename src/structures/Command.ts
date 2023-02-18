@@ -19,7 +19,6 @@ export class Command {
 	executor: CommandExecutor = i => i.reply("No executor was specified.");
 	permissions: Permission[] = [];
 	local = false;
-	addAttachmentOption: any;
 
 	constructor(public readonly name: string, public readonly description = "") {
 		this.#slash.setName(this.name).setDescription(this.description).setDefaultPermission(true);

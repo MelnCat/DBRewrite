@@ -1,4 +1,4 @@
-import { EmbedBuilder } from "discord.js";
+import { MessageEmbed } from "discord.js";
 import { db } from "../../database/database";
 import { generateOrderId, getLatestOrder, hasActiveOrder, OrderFlags } from "../../database/order";
 import { getUserInfo } from "../../database/userInfo";
@@ -33,7 +33,7 @@ export const command = new Command("tip", "Tip your last order.")
 		const tcte = text.commands.tip.embed;
 		await mainChannels.tips.send({
 			embeds: [
-				new EmbedBuilder()
+				new MessageEmbed()
 					.setTitle(tcte.title)
 					.setDescription(
 						format(tcte.description, lastOrder.id, tip, `<@${lastOrder.claimer}>`, `<@${lastOrder.deliverer}>`)

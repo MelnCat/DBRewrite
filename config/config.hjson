@@ -1,0 +1,26 @@
+{
+	token: "NO TOKEN FOR U BIATCH"
+	mainServer: "1003128423713087601"
+	databaseUrl: postgresql://so_drunk:0verTimeGagO@localhost:/gago?schema=public
+	developers: [
+		"4131438867023134721"
+		"1296930974319247361"
+		"3576225635113369621"
+		]
+	emojis: {
+		yes: "1056348355002900560"
+		no: "1056348392852303872"
+	}
+	roles: {
+		employee: "1056339716942868564"
+		moderator: "1056339762891456536"
+		duty: "1056340057528733738" //"665632429855211520" ##Employee Role
+		dutyd: "814959092077559848" //"1054006247457824780" ## Duty ping Role
+	}
+	channels: {
+		brewery: "1056340310952783892"
+		delivery: "1056340327549632542"
+		feedback: "1056340339557929041"
+		tips: "1056340358390354000"
+	}
+}
